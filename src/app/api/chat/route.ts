@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-// Inicializar el cliente de OpenAI. Validar la key en .env.local
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
     try {
@@ -13,6 +10,11 @@ export async function POST(req: Request) {
         if (!process.env.OPENAI_API_KEY) {
             return NextResponse.json({ reply: 'La clave de OpenAI no está configurada en .env.local.' }, { status: 500 });
         }
+
+        // Inicializar el cliente de OpenAI. Validar la key en .env.local
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
 
         const systemMessage = {
             role: 'system',
