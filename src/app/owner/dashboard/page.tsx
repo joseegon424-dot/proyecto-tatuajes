@@ -30,7 +30,7 @@ export default function DashboardPage() {
         setCurrentTime(new Date().toLocaleDateString('es-CO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
 
         // Fetch real appointments
-        supabase.from('appointments').select('*').order('created_at', { ascending: false }).limit(5).then(({ data }) => {
+        supabase.from('appointments').select('*').order('created_at', { ascending: false }).limit(5).then(({ data }: any) => {
             if (data) setAppointments(data);
         });
     }, []);
@@ -39,7 +39,7 @@ export default function DashboardPage() {
     useEffect(() => {
         if (counterRef.current) {
             const counters = counterRef.current.querySelectorAll('.gsap-counter');
-            counters.forEach((el) => {
+            counters.forEach((el: any) => {
                 const target = parseInt(el.getAttribute('data-target') || '0');
                 gsap.fromTo(el, { textContent: 0 }, {
                     textContent: target,
@@ -84,7 +84,7 @@ export default function DashboardPage() {
 
             {/* Stats Grid */}
             <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                {stats.map((stat, i) => {
+                {stats.map((stat: any, i: number) => {
                     const Icon = stat.icon;
                     const TrendIcon = stat.trend === 'up' ? ArrowUpRight : ArrowDownRight;
                     return (
@@ -210,7 +210,7 @@ export default function DashboardPage() {
                         <CardContent>
                             {appointments.length > 0 ? (
                                 <div className="space-y-3">
-                                    {appointments.map((apt, i) => (
+                                    {appointments.map((apt: any, i: number) => (
                                         <div key={i} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 rounded-xl hover:border-white/15 transition-all">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-rose-500 flex items-center justify-center text-sm font-black text-white">
@@ -226,8 +226,8 @@ export default function DashboardPage() {
                                                 <p className="text-[10px] text-white/30">{apt.appointment_date}</p>
                                             </div>
                                             <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${apt.status === 'pending' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                                                    apt.status === 'confirmed' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                                                        'bg-white/5 text-white/40 border border-white/10'
+                                                apt.status === 'confirmed' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                                                    'bg-white/5 text-white/40 border border-white/10'
                                                 }`}>
                                                 {apt.status === 'pending' ? 'Pendiente' : apt.status === 'confirmed' ? 'Confirmada' : apt.status}
                                             </div>

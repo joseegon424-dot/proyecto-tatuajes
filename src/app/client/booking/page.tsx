@@ -42,7 +42,7 @@ function BookingContent() {
         setIsMounted(true);
         const fetchServices = async () => {
             const { data } = await supabase.from('services').select('*').order('base_price', { ascending: true });
-            if (data) setServicesList(data.map(s => ({ name: s.name, basePrice: s.base_price, minDuration: s.min_duration })));
+            if (data) setServicesList(data.map((s: any) => ({ name: s.name || '', basePrice: s.base_price || 0, minDuration: s.min_duration || '' })));
         };
         fetchServices();
     }, []);

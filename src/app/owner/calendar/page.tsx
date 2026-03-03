@@ -123,7 +123,7 @@ export default function CalendarPage() {
 
               {/* Days grid */}
               <div className="grid grid-cols-7 gap-1">
-                {days.map((day, i) => {
+                {days.map((day: any, i: number) => {
                   const dayAppointments = getAppointmentsForDate(day);
                   const isCurrentMonth = isSameMonth(day, currentMonth);
                   const isSelected = selectedDate && isSameDay(day, selectedDate);
@@ -146,9 +146,8 @@ export default function CalendarPage() {
                       {hasAppointments && (
                         <div className="flex gap-0.5 mt-1">
                           {dayAppointments.slice(0, 3).map((_, j) => (
-                            <div key={j} className={`w-1.5 h-1.5 rounded-full ${
-                              j === 0 ? 'bg-violet-400' : j === 1 ? 'bg-gold' : 'bg-rose-400'
-                            }`} />
+                            <div key={j} className={`w-1.5 h-1.5 rounded-full ${j === 0 ? 'bg-violet-400' : j === 1 ? 'bg-gold' : 'bg-rose-400'
+                              }`} />
                           ))}
                         </div>
                       )}
@@ -173,7 +172,7 @@ export default function CalendarPage() {
             <CardContent className="space-y-3 max-h-[60vh] overflow-y-auto">
               <AnimatePresence mode="wait">
                 {selectedAppointments.length > 0 ? (
-                  selectedAppointments.map((apt, i) => {
+                  selectedAppointments.map((apt: any, i: number) => {
                     const status = statusConfig[apt.status] || statusConfig.pending;
                     const StatusIcon = status.icon;
                     return (
