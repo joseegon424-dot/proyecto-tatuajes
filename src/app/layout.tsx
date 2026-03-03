@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
 import { ChatbotBubble } from '@/components/chat/ChatbotBubble';
+import SmoothScroll from '@/components/ui/SmoothScroll';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,11 +27,13 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <body className={`${inter.className} min-h-screen bg-background text-foreground tracking-tight selection:bg-gold/30 antialiased`}>
-        <MagneticCursor />
-        <Navbar />
-        {children}
-        <ChatbotBubble />
-        <Toaster theme="dark" position="bottom-right" className="!font-mono !tracking-widest !uppercase" />
+        <SmoothScroll>
+          <MagneticCursor />
+          <Navbar />
+          {children}
+          <ChatbotBubble />
+          <Toaster theme="dark" position="bottom-right" className="!font-mono !tracking-widest !uppercase" />
+        </SmoothScroll>
       </body>
     </html>
   );
