@@ -191,7 +191,7 @@ function ServicesSection() {
   const [services, setServices] = useState<any[]>([]);
 
   useEffect(() => {
-    supabase.from('services').select('*').order('base_price', { ascending: true }).then(({ data }) => {
+    supabase.from('services').select('*').order('base_price', { ascending: true }).then(({ data }: any) => {
       if (data) setServices(data);
     });
   }, []);
